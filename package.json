@@ -6,7 +6,10 @@
     "Alpine",
     "Alpine JS",
     "Alpine JS Plugin",
-    "Alpine JS Plugins"
+    "Alpine JS Sort",
+    "Alpine JS Sorting",
+    "Sorting",
+    "Sortable"
   ],
   "module": "dist/sort.esm.js",
   "unpkg": "dist/sort.min.js",
