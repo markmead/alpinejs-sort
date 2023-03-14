@@ -1,65 +1,16 @@
-**--- DELETE START ---**
+# Alpine JS Sort
 
-# Alpine JS Plugin Template
-
-This is a template repository to help developers quickly build Alpine JS
-plugins.
-
-## How to Use
-
-1. Clone the repository with the "Use this template" button on GitHub
-2. Run `npm install` to install ES Build
-3. Build your plugin
-
-### Compiling
-
-To compile the code you run `npm run build` which will create two files in the
-`/dist` directory.
-
-### Testing
-
-In this template you will find a `index.html` file that you can use for testing
-how the Alpine JS plugin works.
-
-I recommend using [vercel/serve](https://www.npmjs.com/package/serve) to serve
-this file.
-
-## Things to Change
-
-- Find and replace "PLUGIN" with the name of your plugin
-- Find and replace "FILE" with the name of your compiled file
-- Find and replace "DESCRIPTION" with a description of your plugin
-- Uncomment "index.html" in the `.gitignore` file
-
-🚨 Make sure find and replace is case sensitive
-
-If you were creating a plugin called "Alpine JS CSV" you could do the following:
-
-- "PLUGIN" to "alpinejs-csv"
-- "FILE" to "csv"
-- "DESCRIPTION" to "Transform data into a CSV with Alpine JS 📈"
-
----
-
-### License
-
-The choice of adding a license and what license is best for your project is up
-to you.
-
-[Adding a License on GitHub](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository)
-
-**--- DELETE END ---**
-
-# PLUGIN
-
-DESCRIPTION
+Sort data in Alpine JS without writing any JavaScript 🦜
 
 ## Install
 
 ### With a CDN
 
 ```html
-<script defer src="https://unpkg.com/PLUGIN@latest/dist/FILE.min.js"></script>
+<script
+  defer
+  src="https://unpkg.com/alpinejs-sort@latest/dist/sort.min.js"
+></script>
 
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 ```
@@ -67,27 +18,119 @@ DESCRIPTION
 ### With a Package Manager
 
 ```shell
-yarn add -D PLUGIN
+yarn add -D alpinejs-sort
 
-npm install -D PLUGIN
+npm install -D alpinejs-sort
 ```
 
 ```js
 import Alpine from 'alpinejs'
-import FILE from 'PLUGIN'
+import sort from 'alpinejs-sort'
 
-Alpine.plugin(FILE)
+Alpine.plugin(sort)
 
 Alpine.start()
 ```
 
-## Example
+## Examples
 
-Examples of how the plugin works.
+In all of these examples `asc` is the default, but this can be changed through
+Alpine JS.
+
+_You can move the `x-sort` onto the same element as the `x-data` if you wish._
+
+### Simple Array
+
+```html
+<div x-data="{ items: ['D post', 'A post', 'C post', 'B post'], type: 'asc' }">
+  <select x-model="type">
+    <option value="asc">Asc</option>
+    <option value="desc">Desc</option>
+  </select>
+
+  <ul x-sort.items="type">
+    <template x-for="item in items">
+      <li x-text="item"></li>
+    </template>
+  </ul>
+</div>
+```
+
+Here we simply pass `asc` or `desc` as the array does not contain objects.
+
+### Array of Objects
+
+```html
+<div
+  x-data="{
+      items: [
+        { title: 'D post' },
+        { title: 'A post' },
+        { title: 'C post' },
+        { title: 'B post' }
+      ],
+      type: 'asc.title'
+    }"
+>
+  <select x-model="type">
+    <option value="asc.title">Title (Asc)</option>
+    <option value="desc.title">Title (Desc)</option>
+  </select>
+
+  <ul x-sort.items="type">
+    <template x-for="item in items">
+      <li x-text="item.title"></li>
+    </template>
+  </ul>
+</div>
+```
+
+Here we pass `asc.title` or `desc.title` as we want to sort on an object
+property. This translate to:
+
+> Sort by asc or desc order based on the value of `title`.
+
+### Array of Objects (Nested)
+
+```html
+<div
+  x-data="{
+    items: [
+        { title: { main: 'D post', sub: 'D' } },
+        { title: { main: 'A post', sub: 'A' } },
+        { title: { main: 'C post', sub: 'C' } },
+        { title: { main: 'B post', sub: 'B' } }
+    ],
+    type: 'asc.title.main'
+  }"
+>
+  <select x-model="type">
+    <option value="">Please select</option>
+    <option value="asc.title.main">Title (Asc)</option>
+    <option value="desc.title.main">Title (Desc)</option>
+  </select>
+
+  <ul x-sort.items="type">
+    <template x-for="item in items">
+      <li x-text="item.title.main"></li>
+    </template>
+  </ul>
+</div>
+```
+
+This is the same logic as the previous example.
+
+_The nesting should go as far as you need! `item.title.main.translated.en`? Go
+for it._
+
+Here we pass `asc.title.main` or `desc.title.main` as we want to sort on a
+nested object property. This translate to:
+
+> Sort by asc or desc order based on the value of `main` in the `title` object.
 
 ## Stats
 
-![](https://img.shields.io/bundlephobia/min/PLUGIN)
-![](https://img.shields.io/npm/v/PLUGIN)
-![](https://img.shields.io/npm/dt/PLUGIN)
-![](https://img.shields.io/github/license/markmead/PLUGIN)
+![](https://img.shields.io/bundlephobia/min/alpinejs-sort)
+![](https://img.shields.io/npm/v/alpinejs-sort)
+![](https://img.shields.io/npm/dt/alpinejs-sort)
+![](https://img.shields.io/github/license/markmead/alpinejs-sort)

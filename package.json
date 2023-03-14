@@ -1,15 +1,15 @@
 {
-  "name": "PLUGIN",
+  "name": "alpinejs-sort",
   "version": "1.0.0",
-  "description": "DESCRIPTION",
+  "description": "Sort data in Alpine JS without writing any JavaScript 🦜",
   "keywords": [
     "Alpine",
     "Alpine JS",
     "Alpine JS Plugin",
     "Alpine JS Plugins"
   ],
-  "module": "dist/FILE.esm.js",
-  "unpkg": "dist/FILE.min.js",
+  "module": "dist/sort.esm.js",
+  "unpkg": "dist/sort.min.js",
   "scripts": {
     "build": "node scripts/build.js"
   },
